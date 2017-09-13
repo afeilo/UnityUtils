@@ -3,3 +3,8 @@
 - obb
 
 obb校验类，详情可查看[blog](http://www.jianshu.com/p/af3f8e8f2a96)
+
+- splash
+
+android冷启动黑屏问题
+
