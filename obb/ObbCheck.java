@@ -51,7 +51,7 @@ public class ObbCheck {
 	 */
 	private static String getMd5(String paramString) {
 		try {
-			Log.d("WARX", "path = " + paramString);
+			Log.d("ObbCheck", "path = " + paramString);
 			MessageDigest localMessageDigest = MessageDigest.getInstance("MD5");
 			FileInputStream localFileInputStream = new FileInputStream(
 					paramString);
@@ -63,7 +63,7 @@ public class ObbCheck {
 				localMessageDigest.update(arrayOfByte, 0, i2);
 			}
 			BigInteger bi = new BigInteger(1, localMessageDigest.digest());
-			Log.d("WARX", "md5 = " + bi.toString(16));
+			Log.d("ObbCheck", "md5 = " + bi.toString(16));
 			return bi.toString(16);
 		} catch (FileNotFoundException localFileNotFoundException) {
 		} catch (IOException localIOException) {
