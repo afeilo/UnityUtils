@@ -8,7 +8,11 @@ using UnityEngine.EventSystems;
 
 namespace HypertextHelper
 {
-	//局部文本着色并实现点击
+	
+	/// <summary>
+	/// Hypertext text.
+	/// 局部文本着色并实现点击
+	/// </summary>
 	public abstract class HypertextText:Text,IPointerClickHandler
 	{
 		Canvas _rootCanvas;
@@ -21,29 +25,31 @@ namespace HypertextHelper
 			public string Word;//匹配字段
 			public string ShowWord;//点击后回调
 			public int StartIndex;
-			public Color Color;
 			public Action<string> OnClick;
 			public List<Rect> Rects;
-			public ClickableTextEntry(string word,string showWord,int startIndex,Color color,Action<string> onClick){
+			public ClickableTextEntry(string word,string showWord,int startIndex,Action<string> onClick){
 				Word = word;
 				ShowWord = showWord;
 				StartIndex = startIndex;
-				Color = color;
 				OnClick = onClick;
 				Rects = new List<Rect>();
 			}
 		}
 
 		//超文本信息注册 供子类调用
-		protected void RegisterClickable(string word,string showWord,int startIndex, Color color, Action<string> onClick){
+		protected void RegisterClickable(string word,string showWord,int startIndex, Action<string> onClick){
 			if (startIndex < 0  || onClick == null) {
 				return;
 			}
-			entries.Add (new ClickableTextEntry (word,showWord,startIndex, color, onClick));
+			entries.Add (new ClickableTextEntry (word,showWord,startIndex, onClick));
 		}
 		//超文本信息注册 供子类调用
 		protected void RegisterClickable(ClickableTextEntry clickableEntry){
 			entries.Add (clickableEntry);
+		}
+
+		protected void RemoveAllClickable(){
+			entries.Clear ();
 		}
 		//子类继承注册超文本信息
 		protected abstract void RegisterClickable ();
@@ -71,7 +77,6 @@ namespace HypertextHelper
 							break;
 						}
 						var vertex = vertices [vertexTextIndex];
-						vertex.color = entry.Color;
 						vertices [vertexTextIndex] = vertex;
 						var pos = vertex.position;
 						if (pos.x < min.x) {
