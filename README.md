@@ -15,3 +15,7 @@ Unity使用android权限相关的类，Unity原生的权限显示会在>6.0版�
 - screenshot
 
 Unity截屏分享
+
+- EmojiText
+
+Unity图文混排，[参考](https://blog.uwa4d.com/archives/Sparkle_UGUI.html)修改了一下替换占位符的算法，mark一下
