@@ -142,20 +142,6 @@ public class EmojiFileManager  {
 	public List<EmojiInfo> emojiInfos;
 	public int size;
 	public int count;
-	public class EmojiInfo{
-		public char[] chars;
-		public string key;
-		public int x;
-		public int y;
-		public int size;
-		public EmojiInfo(char[] chars,string key,int x,int y,int size){
-			this.chars = chars;
-			this.key = key;
-			this.x = x;
-			this.y = y;
-			this.size = size;
-		}
-	}
 	public EmojiFileManager(){
 		init ();
 	}
