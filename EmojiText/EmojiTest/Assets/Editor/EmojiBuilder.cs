@@ -129,9 +129,6 @@ public class EmojiBuilder  {
 		//string outputfile2 = OutputPath + "emoji_data.png";
 		//File.WriteAllBytes (outputfile2, bytes2);
 
-		EmojiFile versionFile = EmojiFile.CreateInstance<EmojiFile> ();
-		versionFile.emojiInfos = new List<EmojiFile.EmojiInfo> ();
-
 		//AssetImporter.GetAtPath("Assets/Resources/EmojiFile.asset").assetBundleName = "EmojiFile";
 			
 		FileStream file = File.Open(@"Assets/EmojiFileManager.cs", FileMode.Create); //初始化文件流
@@ -139,7 +136,7 @@ public class EmojiBuilder  {
 		string s = @"using System.Collections.Generic;
 public class EmojiFileManager  {
 	private static EmojiFileManager emojiFileMgr;
-	public List<EmojiInfo> emojiInfos;
+	public Dictionary<string,EmojiInfo> emojiInfos;
 	public int size;
 	public int count;
 	public EmojiFileManager(){
@@ -151,30 +148,26 @@ public class EmojiFileManager  {
 		return emojiFileMgr;
 	}
 	public void init(){
-		emojiInfos = new List<EmojiInfo> ();
+		size=1024;
+		count=845;
 ";
 		sb.Append (s).Append("\t\tsize=").Append((int)texSize.x).Append(";\r\n");
 		sb.Append("\t\tcount=").Append(emojiDic.Count).Append(";\r\n");
+		sb.Append("\t\temojiInfos = new Dictionary<string,EmojiInfo> (count);\r\n");
 		for (int i = 0; i < emojiDic.Count; i++) {
-			EmojiFile.EmojiInfo emojiInfo = new EmojiFile.EmojiInfo ();
-			emojiInfo.key = emojiDic[i].key;
-			emojiInfo.x = emojiDic[i].x;
-			emojiInfo.y = emojiDic[i].y;
-			emojiInfo.size = emojiDic[i].size;
-			sb.Append ("\t\temojiInfos.Add (new EmojiInfo (new char[]{");
+			sb.Append ("\t\temojiInfos.Add (\"").Append ( emojiDic[i].key).Append("\",new EmojiInfo (new char[]{");
 			int j = 0;
 			while (true) {
-				Debug.Log (emojiInfo.key.Length);
-				sb.Append (@"'\u").Append (emojiInfo.key.Substring (j, 4)).Append("'");
+				sb.Append (@"'\u").Append ( emojiDic[i].key.Substring (j, 4)).Append("'");
 				j += 4;
-				if(j < emojiInfo.key.Length){
+				if(j <  emojiDic[i].key.Length){
 					sb.Append(",");
 				}else{
 					break;
 				}
 			}
-			sb.Append ("},\"").Append (emojiInfo.key).Append("\",").Append(emojiInfo.x).Append(",")
-				.Append(emojiInfo.y).Append(",").Append(emojiInfo.size).Append("));\r\n");
+			sb.Append ("},\"").Append ( emojiDic[i].key).Append("\",").Append(emojiDic[i].x).Append(",")
+				.Append(emojiDic[i].y).Append(",").Append(emojiDic[i].size).Append("));\r\n");
 			//versionFile.emojiInfos.Add (emojiInfo);
 		}
 		sb.Append ("\t}\r\n}");
