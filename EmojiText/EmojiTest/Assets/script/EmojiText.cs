@@ -40,7 +40,7 @@ public class EmojiText : Text {
 		string emojitext = text;
 		MatchCollection matches = Regex.Matches (text, "\\≙[a-z0-9A-Z]+\\≙");
 		int len = 0;
-		Dictionary<string,EmojiInfo> emojiInfos = EmojiFileManager.getInstance ().emojiInfos;
+        Dictionary<string, EmojiInfo> emojiInfos = EmojiFileManager.getInstance ().emojiInfos;
 		for (int i = 0; i < matches.Count; i++) {
 			EmojiInfo emojiInfo;
 			string match = matches [i].Value;
@@ -116,15 +116,10 @@ public class EmojiText : Text {
 					m_TempVerts [2].position *= unitsPerPixel;
 					m_TempVerts [3].position *= unitsPerPixel;
 
-					//去除间隙
-					float pixelOffset = 1/2048;
-					float emojiSize = (float)emojiInfo.size / EmojiFileManager.getInstance ().size;
-					float uv_x = (float)emojiInfo.x / EmojiFileManager.getInstance ().size;
-					float uv_y = (float)emojiInfo.y / EmojiFileManager.getInstance ().size;
-					m_TempVerts [0].uv1 = new Vector2 (uv_x + pixelOffset, uv_y + pixelOffset);
-					m_TempVerts [1].uv1 = new Vector2 (uv_x - pixelOffset + emojiSize, uv_y + pixelOffset);
-					m_TempVerts [2].uv1 = new Vector2 (uv_x- pixelOffset +emojiSize, uv_y - pixelOffset + emojiSize);
-					m_TempVerts [3].uv1 = new Vector2 (uv_x+ pixelOffset, uv_y - pixelOffset + emojiSize);
+                    m_TempVerts[0].uv1 = new Vector2(emojiInfo.x, emojiInfo.y);
+                    m_TempVerts[1].uv1 = new Vector2(emojiInfo.x + emojiInfo.size, emojiInfo.y);
+                    m_TempVerts[2].uv1 = new Vector2(emojiInfo.x + emojiInfo.size, emojiInfo.y + emojiInfo.size);
+                    m_TempVerts[3].uv1 = new Vector2(emojiInfo.x, emojiInfo.y + emojiInfo.size);
 					toFill.AddUIVertexQuad (m_TempVerts);
 					i += 3;
 				} else {

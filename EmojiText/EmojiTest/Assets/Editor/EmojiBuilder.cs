@@ -124,7 +124,7 @@ public class EmojiBuilder  {
 		byte[] bytes1 = newTex.EncodeToPNG ();
 		string outputfile1 = OutputPath + "emoji_tex.png";
 		File.WriteAllBytes (outputfile1, bytes1);
-
+        float pixelOffset = 1 / texSize.x/2; 
 		//byte[] bytes2 = dataTex.EncodeToPNG ();
 		//string outputfile2 = OutputPath + "emoji_data.png";
 		//File.WriteAllBytes (outputfile2, bytes2);
@@ -148,8 +148,6 @@ public class EmojiFileManager  {
 		return emojiFileMgr;
 	}
 	public void init(){
-		size=1024;
-		count=845;
 ";
 		sb.Append (s).Append("\t\tsize=").Append((int)texSize.x).Append(";\r\n");
 		sb.Append("\t\tcount=").Append(emojiDic.Count).Append(";\r\n");
@@ -166,8 +164,10 @@ public class EmojiFileManager  {
 					break;
 				}
 			}
-			sb.Append ("},\"").Append ( emojiDic[i].key).Append("\",").Append(emojiDic[i].x).Append(",")
-				.Append(emojiDic[i].y).Append(",").Append(emojiDic[i].size).Append("));\r\n");
+            float uv_x = (float)emojiDic[i].x / texSize.x;
+            float uv_y = (float)emojiDic[i].y / texSize.y;
+            sb.Append("},\"").Append(emojiDic[i].key).Append("\",").Append(uv_x + pixelOffset).Append("f,")
+                .Append(uv_y + pixelOffset).Append("f,").Append((float)(emojiDic[i].size / texSize.x - pixelOffset)).Append("f));\r\n");
 			//versionFile.emojiInfos.Add (emojiInfo);
 		}
 		sb.Append ("\t}\r\n}");

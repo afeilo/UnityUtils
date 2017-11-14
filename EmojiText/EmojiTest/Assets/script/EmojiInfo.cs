@@ -1,10 +1,11 @@
 ﻿public class EmojiInfo{
 	public char[] regex;
 	public string key;
-	public int x;
-	public int y;
-	public int size;
-	public EmojiInfo(char[] regex,string key,int x,int y,int size){
+	public float x;
+    public float y;
+    public float size;
+    public EmojiInfo(char[] regex, string key, float x, float y, float size)
+    {
 		this.regex = regex;
 		this.key = key;
 		this.x = x;
