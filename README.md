@@ -18,7 +18,7 @@ Unity截屏分享
 
 - EmojiText
 
-Unity图文混排，[参考](https://blog.uwa4d.com/archives/Sparkle_UGUI.html)修改了一下替换占位符的算法，mark一下
+Unity图文混排，[参考](https://blog.uwa4d.com/archives/Sparkle_UGUI.html)修改了一下替换占位符的算法，mark一下。里面有一个emoji方案，解析emoji表情并且显示，但是InputField不支持emoji（应该是不支持16位char），需要重写一个InputField类，暂时没时间搞，mark。
 
 - uGUI-Hypertext
 
