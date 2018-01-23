@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/script/UI-EmojiFont.shader">
+    <Files>
+      <File FileName="Assets/script/EmojiText.cs" Line="122" Column="92" />
+      <File FileName="Assets/script/EmojiInfo.cs" Line="4" Column="2" />
+      <File FileName="Assets/Editor/EmojiBuilder.cs" Line="153" Column="21" />
+      <File FileName="Assets/EmojiFileManager.cs" Line="5" Column="2" />
+      <File FileName="Assets/script/UI-EmojiFont.shader" Line="6" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
