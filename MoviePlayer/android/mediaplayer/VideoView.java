@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mediaplayer;
+package main;
 
 import java.io.IOException;
 import java.util.Map;
@@ -88,7 +88,7 @@ public class VideoView extends SurfaceView {
     private OnErrorListener mOnErrorListener;
     private OnInfoListener  mOnInfoListener;
     private int         mSeekWhenPrepared;  // recording the seek position while preparing
-    private AssetFileDescriptor mfd;  //◊ ‘¥
+    private AssetFileDescriptor mfd;  //ËµÑÊ∫ê
     public VideoView(Context context) {
         super(context);
         initVideoView();
@@ -209,9 +209,9 @@ public class VideoView extends SurfaceView {
     }
     
     public void setVideoFileDescriptor(AssetFileDescriptor fd){
-    	mfd = fd;
-    	mUri = null;
-    	mSeekWhenPrepared = 0;
+        mfd = fd;
+        mUri = null;
+        mSeekWhenPrepared = 0;
         openVideo();
         requestLayout();
         invalidate();
@@ -228,7 +228,7 @@ public class VideoView extends SurfaceView {
      *                to disallow or allow cross domain redirection.
      */
     public void setVideoURI(Uri uri, Map<String, String> headers) {
-    	
+        
         mUri = uri;
         mHeaders = headers;
         mSeekWhenPrepared = 0;
@@ -276,11 +276,12 @@ public class VideoView extends SurfaceView {
             mMediaPlayer.setOnInfoListener(mInfoListener);
             mMediaPlayer.setOnBufferingUpdateListener(mBufferingUpdateListener);
             mCurrentBufferPercentage = 0;
+            Log.d("test", "open");
             if(mfd!=null)
-            	mMediaPlayer.setDataSource(mfd.getFileDescriptor(),mfd.getStartOffset(),mfd.getLength());
+                mMediaPlayer.setDataSource(mfd.getFileDescriptor(),mfd.getStartOffset(),mfd.getLength());
             else {
-            	mMediaPlayer.setDataSource(getContext(), mUri, mHeaders);
-			}
+                mMediaPlayer.setDataSource(getContext(), mUri, mHeaders);
+            }
             mMediaPlayer.setDisplay(mSurfaceHolder);
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mMediaPlayer.setScreenOnWhilePlaying(true);
@@ -492,6 +493,8 @@ public class VideoView extends SurfaceView {
             mSurfaceHeight = h;
             boolean isValidState =  (mTargetState == STATE_PLAYING);
             boolean hasValidSize = (mVideoWidth == w && mVideoHeight == h);
+            Log.d("Test", "isValidState = "+isValidState);
+            Log.d("Test", "hasValidSize = "+hasValidSize);
             if (mMediaPlayer != null && isValidState && hasValidSize) {
                 if (mSeekWhenPrepared != 0) {
                     seekTo(mSeekWhenPrepared);
@@ -504,11 +507,15 @@ public class VideoView extends SurfaceView {
         {
             mSurfaceHolder = holder;
             openVideo();
+            if(mCurrentState == STATE_PREPARING)
+                start();
         }
 
         public void surfaceDestroyed(SurfaceHolder holder)
         {
             // after we return from this we can't use the surface any more
+            if (mMediaPlayer!=null)
+                mSeekWhenPrepared = mMediaPlayer.getCurrentPosition();
             mSurfaceHolder = null;
             release(true);
         }
@@ -532,7 +539,10 @@ public class VideoView extends SurfaceView {
 
 
     public void start() {
+        Log.d("Test", "start1");
+        Log.d("Test",Log.getStackTraceString(new Throwable()));  
         if (isInPlaybackState()) {
+            Log.d("Test", "start2");
             mMediaPlayer.start();
             mCurrentState = STATE_PLAYING;
         }
