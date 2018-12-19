@@ -15,14 +15,13 @@ public class SplashActivity extends UnityPlayerActivity{
 		loadingSplash();
 	}
 	/**
-	 * ¼ÓÔØsplash
+	 * Â¼Ã“Ã”Ã˜splash
 	 */
 	private void loadingSplash(){
 		splashImageView = new ImageView(this);
 		splashImageView.setBackgroundResource(R.drawable.logo);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT  , FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
 		mUnityPlayer.addView(splashImageView, params);
-		Log.d("warx", "loadingSplash");
 	}
 	public void hideSplash(){
 		runOnUiThread(new Runnable() {
