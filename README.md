@@ -36,3 +36,7 @@ excel转化成文本，用来转化android ios原生多语言，需要安装pyth
 ```
 python excelToAndroidXml.py 文件名1 文件名2 文件名3
 ```
+
+- SVCParse
+
+真机抓日志可以得到各个阶段编译的shader日志,通过工具可以解析日志并把所有的变体都解析出来并加到svc内。
